@@ -1,0 +1,28 @@
+# Dependencies
+/node_modules/
+
+# Build output
+/dist/
+/.astro/
+
+# Logs
+npm-debug.log*
+yarn-error.log
+pnpm-debug.log
+
+# Env variables
+.env
+.env.*
+!.env.example
+
+# VSCode
+.vscode/
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 

@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/Sections/PageHeader.astro";
+import { getCollection } from "astro:content";
+
+// Fetch all ministries
+const all = await getCollection("ministries", ({ data }) =>
+  import.meta.env.PROD ? !data.draft : true
+);
+// Sort by order or name
+const ministries = all.sort((a, b) =>
+  (a.data.order ?? 0) - (b.data.order ?? 0) ||
+  a.data.name.localeCompare(b.data.name)
+);
+---
+
+<BaseLayout title="Services" description="Discover our ministries.">
+  <PageHeader
+    title="Services"
+    subtitle="Ways to connect, grow, and serve"
+    backgroundImage="/uploads/image2.jpg"
+  />
+
+  <!-- Ministries Grid -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl text-orange-500 font-bold mb-4">Connect With a Service</h2>
+        <p class="text-xl text-black max-w-3xl mx-auto">
+          Explore our services to grow in faith, connect with community, and serve.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {ministries.map(m => (
+        <a
+          href={`/ministries/${m.slug}`}
+          class="
+          g-white p-4 shadow 
+          flex flex-col overflow-hidden 
+          hover:shadow-lg transition
+          min-h-[370px]
+          "
+        >
+            <!-- gambar fixed height 200px -->
+            {m.data.logo && (
+              <div class="w-full h-[200px] overflow-hidden">
+                <img
+                  src={m.data.logo}
+                  alt={m.data.name}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            )}
+
+            <div class="p-4 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-semibold mb-2">{m.data.name}</h3>
+                <p class="text-gray-700">{m.data.summary}</p>
+              </div>
+          
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
