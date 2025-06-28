@@ -1,8 +1,9 @@
 {
-  "name": "maucariapacom-church-starter",
+  "name": "justonecall-website",
   "type": "module",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://g9s.139.mytemp.website",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

@@ -1,66 +1,84 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/Sections/PageHeader.astro";
-import { getCollection } from "astro:content";
 
-// Fetch all ministries
-const all = await getCollection("ministries", ({ data }) =>
-  import.meta.env.PROD ? !data.draft : true
-);
-// Sort by order or name
-const ministries = all.sort((a, b) =>
-  (a.data.order ?? 0) - (b.data.order ?? 0) ||
-  a.data.name.localeCompare(b.data.name)
-);
+// Define our services
+const services = [
+  {
+    title: "General Labour & Handymen",
+    description: "Our skilled general labourers and handymen are available for a wide range of tasks, from property maintenance and small repairs to support on larger construction projects. Whether you need help for a few hours or ongoing site assistance, we provide reliable, flexible, and efficient support tailored to your needs.",
+    image: "/uploads/services/pexels-tima-miroshnichenko-6195115.jpg"
+  },
+  {
+    title: "Drywall Repair & Installation",
+    description: "We offer expert drywall services for both residential and commercial properties. From patching minor holes to full-scale drywall installation, our team ensures smooth finishes and precise craftsmanship to prepare your walls and ceilings for paint, texture, or wallpaper.",
+    image: "/uploads/services/pexels-tima-miroshnichenko-6474295.jpg"
+  },
+  {
+    title: "Professional Painting",
+    description: "Our painting services cover interiors and exteriors for residential, commercial, and industrial properties. We use high-quality materials and professional techniques to deliver clean, durable, and flawless finishes that enhance the beauty and value of your space.",
+    image: "/uploads/services/pexels-muffinsaurs-994164.jpg"
+  },
+  {
+    title: "Demolition & Removal Services",
+    description: "We provide safe and efficient demolition and removal services for residential and commercial projects. From selective interior demolition to complete tear-outs, our experienced team ensures that each project is completed cleanly and on schedule, with proper disposal of all debris.",
+    image: "/uploads/services/pexels-freek-wolsink-508219-31718960.jpg"
+  },
+  {
+    title: "Commercial & Residential Cleaning",
+    description: "Our professional cleaning services are tailored to meet the specific needs of businesses and homeowners. We offer scheduled maintenance cleaning, deep cleaning, and one-time services with attention to detail and consistent quality.",
+    image: "/uploads/services/pexels-matilda-wormwood-4099481.jpg"
+  },
+  {
+    title: "Post-Construction Clean Up",
+    description: "After your renovation or construction project is complete, we take care of the mess. Our post-construction cleaning services remove dust, debris, and residue, leaving the space clean, safe, and ready for occupancy or final inspection.",
+    image: "/uploads/services/post-construction-cleaning-01-res.jpg"
+  },
+  {
+    title: "Water Damage Mitigation",
+    description: "As an IICRC-certified contractor, we provide professional water damage mitigation services that meet the highest industry standards. Our team acts quickly to assess, extract water, dry the affected areas, and prevent further damage. We use specialized equipment and proven methods to restore your property safely and efficiently.",
+    image: "/uploads/services/Mitigation-and-Restoration__ScaleMaxWidthWzEyMDBd.png"
+  },
+  {
+    title: "Fire & Smoke Restoration",
+    description: "Our IICRC-certified fire and smoke restoration technicians are trained to handle the aftermath of fire-related disasters. We manage every step of the recovery process—from soot and odor removal to structural repairs—ensuring your home or business is restored to its pre-loss condition with care and precision.",
+    image: "/uploads/services/FireImage30_2023SMR.jpg"
+  },
+  {
+    title: "Packing, Storage & Moving",
+    description: "We offer full-service packing, secure storage solutions, and professional moving services. Whether you're relocating, downsizing, or managing a restoration project, our team ensures your belongings are safely packed, stored, and transported with care.",
+    image: "/uploads/services/pexels-karolina-grabowska-4498136.jpg"
+  }
+];
 ---
 
-<BaseLayout title="Services" description="Discover our ministries.">
+<BaseLayout title="Services" description="Professional construction and restoration services.">
   <PageHeader
     title="Services"
-    subtitle="Ways to connect, grow, and serve"
-    backgroundImage="/uploads/image2.jpg"
+    subtitle="Professional construction and restoration solutions"
+    backgroundImage="/uploads/pexels-thijsvdw-1094767.jpg"
   />
 
-  <!-- Ministries Grid -->
+  <!-- Services Grid -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl text-orange-500 font-bold mb-4">Connect With a Service</h2>
+        <h2 class="text-3xl md:text-4xl text-orange-500 font-bold mb-4">Our Professional Services</h2>
         <p class="text-xl text-black max-w-3xl mx-auto">
-          Explore our services to grow in faith, connect with community, and serve.
+          Reliable construction, restoration, and cleaning services for residential and commercial properties.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {ministries.map(m => (
-        <a
-          href={`/ministries/${m.slug}`}
-          class="
-          g-white p-4 shadow 
-          flex flex-col overflow-hidden 
-          hover:shadow-lg transition
-          min-h-[370px]
-          "
-        >
-            <!-- gambar fixed height 200px -->
-            {m.data.logo && (
-              <div class="w-full h-[200px] overflow-hidden">
-                <img
-                  src={m.data.logo}
-                  alt={m.data.name}
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            )}
-
-            <div class="p-4 flex flex-col flex-1 justify-between">
-              <div>
-                <h3 class="text-xl font-semibold mb-2">{m.data.name}</h3>
-                <p class="text-gray-700">{m.data.summary}</p>
-              </div>
-          
+        {services.map(service => (
+          <div class="bg-white border-t-8 border-orange-500 p-6 shadow-lg hover:shadow-xl hover:border-blue-500 hover:scale-105 transition-all duration-600 ">
+            <div class="flex flex-col h-full">
+              <img src={service.image} alt={service.title} class="w-full h-64 object-cover  pb-4">
+              <h3 class="text-xl font-semibold mb-4 text-gray-800">{service.title}</h3>
+              <p class="text-gray-600 leading-relaxed flex-grow">{service.description}</p>
+              
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </div>

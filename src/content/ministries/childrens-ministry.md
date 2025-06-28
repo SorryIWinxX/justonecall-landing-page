@@ -1,5 +1,5 @@
 ---
-name: "Children's Ministry"
+name: "General Labour & Handymen"
 slug: "childrens-ministry"
 logo: "/uploads/ministries/childrens-ministry-logo.webp"
 summary: "Nurturing children ages 0-12 in their faith journey through engaging, age-appropriate programs that teach God's love."

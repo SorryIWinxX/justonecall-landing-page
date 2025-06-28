@@ -11,7 +11,7 @@ import Button from "../components/UI/Button.astro";
   <PageHeader
     title="Contact Us"
     subtitle="We'd love to hear from you"
-    backgroundImage="/uploads/contact-header-bg.webp"
+    backgroundImage="/uploads/pexels-pixabay-209266.jpg"
   />
 
   <!-- Contact Information -->
@@ -20,9 +20,12 @@ import Button from "../components/UI/Button.astro";
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
         <!-- Contact Form -->
         <div>
-          <h2 class="text-3xl font-bold mb-6">Send Us a Message</h2>
+          <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
 
-          <form id="contact-form" class="space-y-6">
+          <form id="contact-form" action="https://formspree.io/f/mvgrvjyb" method="POST" class="space-y-6">
+            <!-- Hidden field for Formspree success redirect -->
+            <input type="hidden" name="_next" value={`${Astro.url.origin}/contact?success=true`} />
+            
             <div>
               <label
                 for="name"
@@ -66,27 +69,7 @@ import Button from "../components/UI/Button.astro";
               />
             </div>
 
-            <div>
-              <label
-                for="subject"
-                class="block text-sm font-medium text-black mb-1"
-                >Subject</label
-              >
-              <select
-                id="subject"
-                name="subject"
-                required
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
-              >
-                <option value="">Please select</option>
-                <option value="General Inquiry">General Inquiry</option>
-                <option value="Prayer Request">Prayer Request</option>
-                <option value="Pastoral Care">Pastoral Care</option>
-                <option value="Volunteering">Volunteering</option>
-                <option value="Events">Events</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+           
 
             <div>
               <label
@@ -109,19 +92,26 @@ import Button from "../components/UI/Button.astro";
           </form>
 
           <script>
-            // Handle form submission
+            // Handle form submission with Formspree
             document
               .getElementById("contact-form")
               ?.addEventListener("submit", function (e) {
-                e.preventDefault();
-
-                // In a real implementation, you would handle the form submission here
-                // For this template, we'll just show a success message
-                alert(
-                  "Thank you for your message! We will get back to you soon."
-                );
-                (e.target as HTMLFormElement).reset();
+                // Allow the form to submit to Formspree
+                // Show loading state
+                const submitButton = this.querySelector('button[type="submit"]') as HTMLButtonElement;
+                if (submitButton) {
+                  submitButton.disabled = true;
+                  submitButton.textContent = 'Sending...';
+                }
               });
+
+            // Handle successful submission redirect
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+              alert("Thank you for your message! We will get back to you soon.");
+              // Clear the success parameter from URL
+              window.history.replaceState({}, document.title, window.location.pathname);
+            }
           </script>
         </div>
 
@@ -274,18 +264,19 @@ import Button from "../components/UI/Button.astro";
   <div class="">
     <div class="text-center mb-12">
       <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-        Visit Our Church
+        Visit Our Office
       </h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        We're located in the heart of the community. Join us for
-        worship services and events.
+        We are located in Canada, Ontario, Nepean, 11 Grenadier Way.
       </p>
     </div>
 
     <div class="w-full overflow-hidden shadow-xl">
       <!-- Google Maps Embed -->
+       
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1841796517827!2d-73.98731668459446!3d40.74844797932796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1635959207845!5m2!1sen!2sus"
+
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2807.231751005817!2d-75.72699452379686!3d45.283538445474875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccdfd31b6520f0d%3A0x413f22f01a664e18!2s11%20Grenadier%20Way%2C%20Nepean%2C%20ON%20K2J%204L3%2C%20Canad%C3%A1!5e0!3m2!1ses!2sco!4v1751078975678!5m2!1ses!2sco"
         height="400"
         style="border:0;"
         allowfullscreen=""
