@@ -43,7 +43,7 @@ const currentPath = Astro.url.pathname;
             <li class="relative group">
               <button
                 class={`text-lg font-medium transition-colors flex items-center ${
-                  isActive ? "text-orange-600" : "text-black"
+                  isActive ? "text-primary-500" : "text-black"
                 }`}
                 aria-expanded="false"
                 aria-haspopup="true"
@@ -55,7 +55,7 @@ const currentPath = Astro.url.pathname;
               </button>
               
               <!-- Dropdown Menu -->
-              <div class="absolute top-full left-0 mt-1 w-60 bg-white shadow-xl border-t-4 border-orange-600 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div class="absolute top-full left-0 mt-1 w-60 bg-white shadow-xl border-t-4 border-primary-500 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div class="py-2">
                   {item.dropdownItems?.map((subItem) => {
                     const isSubActive = currentPath === subItem.href || 
@@ -65,8 +65,8 @@ const currentPath = Astro.url.pathname;
                         href={subItem.href}
                         class={`block px-8 py-2 text-lg transition-colors ${
                           isSubActive 
-                            ? " text-orange-600 font-medium" 
-                            : "text-black hover:text-orange-600"
+                            ? " text-primary-500 font-medium" 
+                            : "text-black hover:text-primary-600"
                         }`}
                       >
                         {subItem.text}
@@ -83,7 +83,7 @@ const currentPath = Astro.url.pathname;
               <a
                 href={item.href}
                 class={`text-lg font-medium transition-colors ${
-                  isActive ? "text-orange-600" : "text-black"
+                  isActive ? "text-primary-600" : "text-black"
                 }`}
                 aria-current={isActive ? "page" : undefined}
               >
@@ -100,7 +100,7 @@ const currentPath = Astro.url.pathname;
 <!-- Mobile Menu Button -->
 <button
   id="mobile-menu-button"
-  class="lg:hidden p-2 text-black hover:text-orange-600 focus:outline-none transition-colors relative"
+  class="lg:hidden p-2 text-black hover:text-primary-600 focus:outline-none transition-colors relative"
   aria-label="Toggle Menu"
   aria-expanded="false"
 >
@@ -132,8 +132,8 @@ const currentPath = Astro.url.pathname;
                 <button
                   class={`w-full flex items-center justify-center px-4 py-3 text-sm font-medium transition-colors ${
                     isDropdownActive 
-                      ? "text-white bg-orange-500" 
-                      : "text-black hover:text-orange-600"
+                      ? "text-white bg-primary-500" 
+                      : "text-black hover:text-primary-600"
                   }`}
                   data-dropdown-trigger={`mobile-dropdown-${index}`}
                   aria-expanded="false"
@@ -166,8 +166,8 @@ const currentPath = Astro.url.pathname;
                           href={subItem.href}
                           class={`block px-8 py-2 text-sm transition-colors ml-4 ${
                             isSubActive 
-                              ? "bg-orange-500 text-white font-medium" 
-                              : "text-black hover:text-orange-600"
+                              ? "bg-primary-500 text-white font-medium" 
+                              : "text-black hover:text-primary-600"
                           }`}
                           role="menuitem"
                           aria-current={isSubActive ? "page" : undefined}
@@ -189,8 +189,8 @@ const currentPath = Astro.url.pathname;
                 href={item.href}
                 class={`block px-4 py-3 text-sm font-medium transition-colors text-center ${
                   isActive 
-                    ? "text-white bg-orange-500" 
-                    : "text-black hover:text-orange-600"
+                    ? "text-white bg-primary-500" 
+                    : "text-black hover:text-primary-600"
                 }`}
                 role="menuitem"
                 aria-current={isActive ? "page" : undefined}
